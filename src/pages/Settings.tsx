@@ -1,9 +1,11 @@
- import { useState } from "react";
- import { User, Lock, Bell, Palette, Save, Camera, Check } from "lucide-react";
- import { Switch } from "@/components/ui/switch";
+import { useState } from "react";
+import { User, Lock, Bell, Palette, Save, Camera, Check } from "lucide-react";
+import { Switch } from "@/components/ui/switch";
+import { useTheme } from "@/hooks/use-theme";
  
- export default function Settings() {
-   const [activeTab, setActiveTab] = useState("profile");
+export default function Settings() {
+    const { theme, setTheme } = useTheme();
+    const [activeTab, setActiveTab] = useState("profile");
    const [saved, setSaved] = useState(false);
    const [profile, setProfile] = useState({
      name: "Admin User",
@@ -240,21 +242,23 @@
  
                <div className="space-y-4">
                  <div>
-                   <h3 className="font-medium mb-3">Theme</h3>
-                   <div className="flex gap-4">
-                     <button className="p-4 rounded-xl border-2 border-primary bg-background">
-                       <div className="w-20 h-12 rounded-lg bg-gradient-to-br from-slate-900 to-slate-800 mb-2" />
-                       <p className="text-sm font-medium">Dark</p>
-                     </button>
-                     <button className="p-4 rounded-xl border border-border bg-muted/30 opacity-50">
-                       <div className="w-20 h-12 rounded-lg bg-gradient-to-br from-slate-100 to-white mb-2" />
-                       <p className="text-sm font-medium">Light</p>
-                     </button>
-                     <button className="p-4 rounded-xl border border-border bg-muted/30 opacity-50">
-                       <div className="w-20 h-12 rounded-lg bg-gradient-to-br from-slate-400 to-slate-600 mb-2" />
-                       <p className="text-sm font-medium">System</p>
-                     </button>
-                   </div>
+                    <h3 className="font-medium mb-3">Theme</h3>
+                    <div className="flex gap-4">
+                      <button
+                        onClick={() => setTheme("light")}
+                        className={`p-4 rounded-xl border-2 transition-colors ${theme === "light" ? "border-primary bg-muted/50" : "border-border bg-muted/30 opacity-60 hover:opacity-80"}`}
+                      >
+                        <div className="w-20 h-12 rounded-lg bg-gradient-to-br from-slate-100 to-white mb-2 border border-border" />
+                        <p className="text-sm font-medium">Light</p>
+                      </button>
+                      <button
+                        onClick={() => setTheme("dark")}
+                        className={`p-4 rounded-xl border-2 transition-colors ${theme === "dark" ? "border-primary bg-muted/50" : "border-border bg-muted/30 opacity-60 hover:opacity-80"}`}
+                      >
+                        <div className="w-20 h-12 rounded-lg bg-gradient-to-br from-slate-900 to-slate-800 mb-2" />
+                        <p className="text-sm font-medium">Dark</p>
+                      </button>
+                    </div>
                  </div>
  
                  <div>

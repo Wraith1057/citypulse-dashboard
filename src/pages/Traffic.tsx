@@ -1,14 +1,15 @@
- import { Car, AlertTriangle, MapPin, Clock, TrendingUp, TrendingDown } from "lucide-react";
- import { StatusBadge } from "@/components/dashboard/StatusBadge";
- import {
-   BarChart,
-   Bar,
-   XAxis,
-   YAxis,
-   CartesianGrid,
-   Tooltip,
-   ResponsiveContainer,
- } from "recharts";
+import { Car, AlertTriangle, MapPin, Clock, TrendingUp, TrendingDown } from "lucide-react";
+import { StatusBadge } from "@/components/dashboard/StatusBadge";
+import { useThemeChartStyles } from "@/hooks/use-chart-styles";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
  
  const congestionData = [
    { zone: "Downtown", level: 85, change: "+12%" },
@@ -44,8 +45,9 @@
    { road: "Industrial Road", status: "Clear", delay: "0 min" },
  ];
  
- export default function Traffic() {
-   const getCongestionColor = (level: number) => {
+export default function Traffic() {
+    const chartStyles = useThemeChartStyles();
+    const getCongestionColor = (level: number) => {
      if (level >= 70) return "bg-destructive";
      if (level >= 40) return "bg-warning";
      return "bg-success";
@@ -139,17 +141,11 @@
            <h3 className="text-lg font-semibold mb-4">Today's Traffic Pattern</h3>
            <div className="h-64">
              <ResponsiveContainer width="100%" height="100%">
-               <BarChart data={hourlyData}>
-                 <CartesianGrid strokeDasharray="3 3" stroke="hsl(220, 30%, 18%)" />
-                 <XAxis dataKey="hour" stroke="hsl(215, 20%, 65%)" fontSize={12} />
-                 <YAxis stroke="hsl(215, 20%, 65%)" fontSize={12} />
-                 <Tooltip
-                   contentStyle={{
-                     backgroundColor: "hsl(222, 47%, 10%)",
-                     border: "1px solid hsl(220, 30%, 25%)",
-                     borderRadius: "8px",
-                   }}
-                 />
+                <BarChart data={hourlyData}>
+                  <CartesianGrid strokeDasharray="3 3" stroke={chartStyles.grid} />
+                  <XAxis dataKey="hour" stroke={chartStyles.text} fontSize={12} />
+                  <YAxis stroke={chartStyles.text} fontSize={12} />
+                  <Tooltip contentStyle={chartStyles.tooltip} />
                  <Bar
                    dataKey="traffic"
                    fill="hsl(174, 72%, 46%)"
