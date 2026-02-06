@@ -1,17 +1,18 @@
- import { useState } from "react";
- import { Download, Calendar, FileText, BarChart3, PieChart, TrendingUp } from "lucide-react";
- import {
-   AreaChart,
-   Area,
-   XAxis,
-   YAxis,
-   CartesianGrid,
-   Tooltip,
-   ResponsiveContainer,
-   PieChart as RechartsPieChart,
-   Pie,
-   Cell,
- } from "recharts";
+import { useState } from "react";
+import { Download, Calendar, FileText, BarChart3, PieChart, TrendingUp } from "lucide-react";
+import { useThemeChartStyles } from "@/hooks/use-chart-styles";
+import {
+  AreaChart,
+  Area,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  PieChart as RechartsPieChart,
+  Pie,
+  Cell,
+} from "recharts";
  
  const monthlyData = [
    { month: "Jul", complaints: 180, resolved: 165, pending: 15 },
@@ -39,8 +40,9 @@
    { name: "Emergency Response Stats", type: "PDF", size: "1.1 MB", date: "Jan 15, 2025" },
  ];
  
- export default function Reports() {
-   const [dateRange, setDateRange] = useState("last-6-months");
+export default function Reports() {
+    const [dateRange, setDateRange] = useState("last-6-months");
+    const chartStyles = useThemeChartStyles();
  
    return (
      <div className="space-y-6">
@@ -136,16 +138,10 @@
                      <stop offset="95%" stopColor="hsl(142, 76%, 36%)" stopOpacity={0} />
                    </linearGradient>
                  </defs>
-                 <CartesianGrid strokeDasharray="3 3" stroke="hsl(220, 30%, 18%)" />
-                 <XAxis dataKey="month" stroke="hsl(215, 20%, 65%)" fontSize={12} />
-                 <YAxis stroke="hsl(215, 20%, 65%)" fontSize={12} />
-                 <Tooltip
-                   contentStyle={{
-                     backgroundColor: "hsl(222, 47%, 10%)",
-                     border: "1px solid hsl(220, 30%, 25%)",
-                     borderRadius: "8px",
-                   }}
-                 />
+                  <CartesianGrid strokeDasharray="3 3" stroke={chartStyles.grid} />
+                  <XAxis dataKey="month" stroke={chartStyles.text} fontSize={12} />
+                  <YAxis stroke={chartStyles.text} fontSize={12} />
+                  <Tooltip contentStyle={chartStyles.tooltip} />
                  <Area type="monotone" dataKey="complaints" stroke="hsl(174, 72%, 46%)" fillOpacity={1} fill="url(#colorTotal)" strokeWidth={2} />
                  <Area type="monotone" dataKey="resolved" stroke="hsl(142, 76%, 36%)" fillOpacity={1} fill="url(#colorRes)" strokeWidth={2} />
                </AreaChart>
@@ -172,13 +168,7 @@
                      <Cell key={`cell-${index}`} fill={entry.color} />
                    ))}
                  </Pie>
-                 <Tooltip
-                   contentStyle={{
-                     backgroundColor: "hsl(222, 47%, 10%)",
-                     border: "1px solid hsl(220, 30%, 25%)",
-                     borderRadius: "8px",
-                   }}
-                 />
+                  <Tooltip contentStyle={chartStyles.tooltip} />
                </RechartsPieChart>
              </ResponsiveContainer>
            </div>

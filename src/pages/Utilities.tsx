@@ -1,15 +1,16 @@
- import { useState } from "react";
- import { Droplets, Zap, AlertTriangle, TrendingUp, TrendingDown, Gauge } from "lucide-react";
- import { StatusBadge } from "@/components/dashboard/StatusBadge";
- import {
-   LineChart,
-   Line,
-   XAxis,
-   YAxis,
-   CartesianGrid,
-   Tooltip,
-   ResponsiveContainer,
- } from "recharts";
+import { useState } from "react";
+import { Droplets, Zap, AlertTriangle, TrendingUp, TrendingDown, Gauge } from "lucide-react";
+import { StatusBadge } from "@/components/dashboard/StatusBadge";
+import { useThemeChartStyles } from "@/hooks/use-chart-styles";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
  
  const waterData = [
    { time: "00:00", usage: 45 },
@@ -44,8 +45,9 @@
    { id: 4, type: "Electricity", message: "Peak load warning - Downtown", status: "active" as const, time: "30 min ago" },
  ];
  
- export default function Utilities() {
-   const [activeTab, setActiveTab] = useState<"water" | "electricity">("water");
+export default function Utilities() {
+    const [activeTab, setActiveTab] = useState<"water" | "electricity">("water");
+    const chartStyles = useThemeChartStyles();
  
    return (
      <div className="space-y-6">
@@ -140,17 +142,11 @@
            </h3>
            <div className="h-72">
              <ResponsiveContainer width="100%" height="100%">
-               <LineChart data={activeTab === "water" ? waterData : electricityData}>
-                 <CartesianGrid strokeDasharray="3 3" stroke="hsl(220, 30%, 18%)" />
-                 <XAxis dataKey="time" stroke="hsl(215, 20%, 65%)" fontSize={12} />
-                 <YAxis stroke="hsl(215, 20%, 65%)" fontSize={12} />
-                 <Tooltip
-                   contentStyle={{
-                     backgroundColor: "hsl(222, 47%, 10%)",
-                     border: "1px solid hsl(220, 30%, 25%)",
-                     borderRadius: "8px",
-                   }}
-                 />
+                <LineChart data={activeTab === "water" ? waterData : electricityData}>
+                  <CartesianGrid strokeDasharray="3 3" stroke={chartStyles.grid} />
+                  <XAxis dataKey="time" stroke={chartStyles.text} fontSize={12} />
+                  <YAxis stroke={chartStyles.text} fontSize={12} />
+                  <Tooltip contentStyle={chartStyles.tooltip} />
                  <Line
                    type="monotone"
                    dataKey="usage"
