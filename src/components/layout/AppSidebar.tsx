@@ -41,7 +41,7 @@ export function AppSidebar() {
     >
       <div className="flex flex-col h-full">
         {/* Logo */}
-        <div className={cn("flex items-center gap-3 py-6 border-b border-sidebar-border", collapsed ? "px-4 justify-center" : "px-6")}>
+        <div className={cn("flex items-center gap-3 py-5 border-b border-sidebar-border", collapsed ? "px-4 justify-center" : "px-5")}>
           <div className="w-10 h-10 rounded-xl gradient-primary flex items-center justify-center glow-primary shrink-0">
             <Building2 className="w-6 h-6 text-primary-foreground" />
           </div>
@@ -54,7 +54,7 @@ export function AppSidebar() {
         </div>
 
         {/* Navigation */}
-        <nav className={cn("flex-1 py-6 space-y-2 overflow-y-auto", collapsed ? "px-2" : "px-4")}>
+        <nav className={cn("flex-1 py-4 space-y-1 overflow-hidden", collapsed ? "px-2" : "px-3")}>
           {navItems.map((item) => {
             const isActive = location.pathname === item.url;
             return (
@@ -62,13 +62,13 @@ export function AppSidebar() {
                 key={item.url}
                 to={item.url}
                 className={cn(
-                  "nav-item",
+                  "nav-item text-sm py-2.5",
                   isActive && "nav-item-active",
-                  collapsed && "justify-center px-3"
+                  collapsed && "justify-center px-2"
                 )}
                 title={collapsed ? item.title : undefined}
               >
-                <item.icon className={cn("w-5 h-5 shrink-0", isActive && "text-primary")} />
+                <item.icon className={cn("w-[18px] h-[18px] shrink-0", isActive && "text-primary")} />
                 {!collapsed && <span className="truncate">{item.title}</span>}
               </NavLink>
             );
@@ -76,10 +76,10 @@ export function AppSidebar() {
         </nav>
 
         {/* Collapse Button */}
-        <div className="p-4 border-t border-sidebar-border">
+        <div className="p-3 border-t border-sidebar-border">
           <button
             onClick={toggle}
-            className="w-full flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-muted-foreground hover:bg-sidebar-accent hover:text-foreground transition-colors"
+            className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-sm text-muted-foreground hover:bg-sidebar-accent hover:text-foreground transition-colors"
           >
             {collapsed ? (
               <ChevronRight className="w-5 h-5" />
