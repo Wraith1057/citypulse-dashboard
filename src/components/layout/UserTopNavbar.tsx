@@ -1,4 +1,4 @@
-import { Bell, Search, User, ChevronDown, LogOut, Sun, Moon } from "lucide-react";
+import { Bell, User, ChevronDown, LogOut, Sun, Moon } from "lucide-react";
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useTheme } from "@/hooks/use-theme";
@@ -11,45 +11,35 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 const breadcrumbMap: Record<string, string> = {
-  "/dashboard": "Dashboard",
-  "/complaints": "Citizen Complaints",
-  "/add-complaint": "Add Complaint",
-  "/waste": "Waste Management",
-  "/traffic": "Traffic & Transport",
-  "/utilities": "Water & Electricity",
-  "/emergency": "Emergency Services",
-  "/reports": "Reports & Analytics",
-  "/settings": "Settings",
+  "/user/dashboard": "Dashboard",
+  "/user/complaints": "My Complaints",
+  "/user/add-complaint": "New Complaint",
+  "/user/track": "Track Complaint",
 };
 
-export function TopNavbar() {
-  const [notifications] = useState(5);
+export function UserTopNavbar() {
+  const [notifications] = useState(2);
   const navigate = useNavigate();
   const location = useLocation();
   const { theme, toggleTheme } = useTheme();
   const currentPage = breadcrumbMap[location.pathname] || "Dashboard";
 
+  const handleLogout = () => {
+    localStorage.removeItem("cityos-role");
+    navigate("/");
+  };
+
   return (
     <header className="sticky top-0 z-30 h-16 bg-card/80 backdrop-blur-xl border-b border-border flex items-center justify-between px-6">
       {/* Breadcrumb */}
       <div className="flex items-center gap-2">
-        <span className="text-muted-foreground">Home</span>
+        <span className="text-muted-foreground">Citizen Portal</span>
         <span className="text-muted-foreground">/</span>
         <span className="font-medium text-foreground">{currentPage}</span>
       </div>
 
       {/* Right Section */}
       <div className="flex items-center gap-2">
-        {/* Search */}
-        <div className="hidden md:flex items-center gap-2 px-4 py-2 rounded-lg bg-muted/50 border border-border">
-          <Search className="w-4 h-4 text-muted-foreground" />
-          <input
-            type="text"
-            placeholder="Search..."
-            className="bg-transparent border-none outline-none text-sm w-40 placeholder:text-muted-foreground"
-          />
-        </div>
-
         {/* Theme Toggle */}
         <button
           onClick={toggleTheme}
@@ -81,19 +71,19 @@ export function TopNavbar() {
                 <User className="w-4 h-4 text-primary-foreground" />
               </div>
               <div className="hidden md:block text-left">
-                <p className="text-sm font-medium">Admin User</p>
-                <p className="text-xs text-muted-foreground">City Administrator</p>
+                <p className="text-sm font-medium">Citizen User</p>
+                <p className="text-xs text-muted-foreground">Resident</p>
               </div>
               <ChevronDown className="w-4 h-4 text-muted-foreground hidden md:block" />
             </button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-56">
-            <DropdownMenuItem onClick={() => navigate("/settings")}>
+            <DropdownMenuItem>
               <User className="w-4 h-4 mr-2" />
-              Profile Settings
+              My Profile
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={() => { localStorage.removeItem("cityos-role"); navigate("/"); }} className="text-destructive">
+            <DropdownMenuItem onClick={handleLogout} className="text-destructive">
               <LogOut className="w-4 h-4 mr-2" />
               Logout
             </DropdownMenuItem>
