@@ -1,20 +1,24 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Building2, Mail, Lock, Eye, EyeOff } from "lucide-react";
+import { Building2, Mail, Lock, Eye, EyeOff, Shield, UserCircle } from "lucide-react";
 import citySkyline from "@/assets/city-skyline.jpg";
+
+type Role = "admin" | "user";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [role, setRole] = useState<Role>("user");
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     setTimeout(() => {
-      navigate("/dashboard");
+      localStorage.setItem("cityos-role", role);
+      navigate(role === "admin" ? "/dashboard" : "/user/dashboard");
     }, 1000);
   };
 
@@ -42,6 +46,34 @@ export default function Login() {
           <p className="text-muted-foreground mt-1">Smart City Management Platform</p>
         </div>
 
+        {/* Role Toggle */}
+        <div className="flex gap-2 mb-6 p-1 rounded-xl bg-muted/50 border border-border">
+          <button
+            type="button"
+            onClick={() => setRole("user")}
+            className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 ${
+              role === "user"
+                ? "bg-card shadow-sm text-primary border border-primary/20"
+                : "text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            <UserCircle className="w-4 h-4" />
+            Citizen
+          </button>
+          <button
+            type="button"
+            onClick={() => setRole("admin")}
+            className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 ${
+              role === "admin"
+                ? "bg-card shadow-sm text-primary border border-primary/20"
+                : "text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            <Shield className="w-4 h-4" />
+            Admin
+          </button>
+        </div>
+
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-5">
           <div className="space-y-2">
@@ -52,7 +84,7 @@ export default function Login() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="admin@cityos.gov"
+                placeholder={role === "admin" ? "admin@cityos.gov" : "citizen@email.com"}
                 className="w-full input-glass pl-12"
                 required
               />
@@ -97,7 +129,7 @@ export default function Login() {
             {isLoading ? (
               <div className="w-5 h-5 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
             ) : (
-              "Sign In"
+              `Sign In as ${role === "admin" ? "Admin" : "Citizen"}`
             )}
           </button>
         </form>
