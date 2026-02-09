@@ -25,11 +25,11 @@ const monthlyData = [
 ];
 
 const categoryData = [
-  { name: "Roads & Infrastructure", value: 35, color: "hsl(174, 72%, 46%)" },
-  { name: "Water Supply", value: 25, color: "hsl(199, 89%, 48%)" },
-  { name: "Waste Management", value: 20, color: "hsl(38, 92%, 50%)" },
-  { name: "Electricity", value: 12, color: "hsl(142, 76%, 36%)" },
-  { name: "Others", value: 8, color: "hsl(215, 20%, 65%)" },
+  { name: "Roads & Infrastructure", value: 35, color: "hsl(228, 43%, 37%)" },
+  { name: "Water Supply", value: 25, color: "hsl(207, 58%, 78%)" },
+  { name: "Waste Management", value: 20, color: "hsl(0, 90%, 70%)" },
+  { name: "Electricity", value: 12, color: "hsl(47, 88%, 80%)" },
+  { name: "Others", value: 8, color: "hsl(228, 44%, 25%)" },
 ];
 
 export default function Dashboard() {
@@ -87,12 +87,12 @@ export default function Dashboard() {
               <AreaChart data={monthlyData}>
                 <defs>
                   <linearGradient id="colorComplaints" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="hsl(174, 72%, 46%)" stopOpacity={0.3} />
-                    <stop offset="95%" stopColor="hsl(174, 72%, 46%)" stopOpacity={0} />
+                    <stop offset="5%" stopColor="hsl(228, 43%, 37%)" stopOpacity={0.3} />
+                    <stop offset="95%" stopColor="hsl(228, 43%, 37%)" stopOpacity={0} />
                   </linearGradient>
                   <linearGradient id="colorResolved" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="hsl(142, 76%, 36%)" stopOpacity={0.3} />
-                    <stop offset="95%" stopColor="hsl(142, 76%, 36%)" stopOpacity={0} />
+                    <stop offset="5%" stopColor="hsl(0, 90%, 70%)" stopOpacity={0.3} />
+                    <stop offset="95%" stopColor="hsl(0, 90%, 70%)" stopOpacity={0} />
                   </linearGradient>
                 </defs>
                 <CartesianGrid strokeDasharray="3 3" stroke={chartStyles.grid} />
@@ -102,7 +102,7 @@ export default function Dashboard() {
                 <Area
                   type="monotone"
                   dataKey="complaints"
-                  stroke="hsl(174, 72%, 46%)"
+                  stroke="hsl(228, 43%, 37%)"
                   fillOpacity={1}
                   fill="url(#colorComplaints)"
                   strokeWidth={2}
@@ -110,7 +110,7 @@ export default function Dashboard() {
                 <Area
                   type="monotone"
                   dataKey="resolved"
-                  stroke="hsl(142, 76%, 36%)"
+                  stroke="hsl(0, 90%, 70%)"
                   fillOpacity={1}
                   fill="url(#colorResolved)"
                   strokeWidth={2}
@@ -120,11 +120,11 @@ export default function Dashboard() {
           </div>
           <div className="flex items-center justify-center gap-6 mt-4">
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full bg-primary" />
+              <div className="w-3 h-3 rounded-full" style={{ backgroundColor: "hsl(228, 43%, 37%)" }} />
               <span className="text-sm text-muted-foreground">Complaints</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full bg-success" />
+              <div className="w-3 h-3 rounded-full" style={{ backgroundColor: "hsl(0, 90%, 70%)" }} />
               <span className="text-sm text-muted-foreground">Resolved</span>
             </div>
           </div>
