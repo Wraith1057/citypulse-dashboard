@@ -42,13 +42,13 @@ export function AppSidebar() {
       <div className="flex flex-col h-full">
         {/* Logo */}
         <div className={cn("flex items-center gap-3 py-5 border-b border-sidebar-border", collapsed ? "px-4 justify-center" : "px-5")}>
-          <div className="w-10 h-10 rounded-xl gradient-primary flex items-center justify-center glow-primary shrink-0">
-            <Building2 className="w-6 h-6 text-primary-foreground" />
+          <div className="w-10 h-10 rounded-xl bg-sidebar-primary flex items-center justify-center shrink-0 shadow-lg shadow-sidebar-primary/20">
+            <Building2 className="w-6 h-6 text-sidebar-primary-foreground" />
           </div>
           {!collapsed && (
             <div className="animate-fade-in">
-              <h1 className="font-bold text-lg gradient-text">CityOS</h1>
-              <p className="text-xs text-muted-foreground">Smart City Platform</p>
+              <h1 className="font-bold text-lg text-sidebar-primary">CityOS</h1>
+              <p className="text-xs text-sidebar-foreground/60">Smart City Platform</p>
             </div>
           )}
         </div>
@@ -62,13 +62,15 @@ export function AppSidebar() {
                 key={item.url}
                 to={item.url}
                 className={cn(
-                  "nav-item text-sm py-2.5",
-                  isActive && "nav-item-active",
+                  "flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm transition-all duration-200",
+                  isActive
+                    ? "bg-sidebar-primary/20 text-sidebar-primary font-medium border-l-2 border-sidebar-primary"
+                    : "text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-foreground",
                   collapsed && "justify-center px-2"
                 )}
                 title={collapsed ? item.title : undefined}
               >
-                <item.icon className={cn("w-[18px] h-[18px] shrink-0", isActive && "text-primary")} />
+                <item.icon className={cn("w-[18px] h-[18px] shrink-0", isActive && "text-sidebar-primary")} />
                 {!collapsed && <span className="truncate">{item.title}</span>}
               </NavLink>
             );
@@ -79,7 +81,7 @@ export function AppSidebar() {
         <div className="p-3 border-t border-sidebar-border">
           <button
             onClick={toggle}
-            className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-sm text-muted-foreground hover:bg-sidebar-accent hover:text-foreground transition-colors"
+            className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-sm text-sidebar-foreground/60 hover:bg-sidebar-accent hover:text-sidebar-foreground transition-colors"
           >
             {collapsed ? (
               <ChevronRight className="w-5 h-5" />
