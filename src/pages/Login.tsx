@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Building2, Mail, Lock, Eye, EyeOff, Shield, UserCircle } from "lucide-react";
-import citySkyline from "@/assets/city-skyline.jpg";
 
 type Role = "admin" | "user";
 
@@ -23,13 +22,9 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen relative flex items-center justify-center p-4 overflow-hidden">
+    <div className="min-h-screen relative flex items-center justify-center p-4 overflow-hidden bg-background">
       {/* Background */}
-      <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${citySkyline})` }}
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/85 to-background/50" />
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-accent/10" />
 
       {/* Floating Elements */}
       <div className="absolute top-20 left-20 w-72 h-72 bg-primary/15 rounded-full blur-3xl animate-float" />
