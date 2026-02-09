@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { User, Lock, Bell, Palette, Save, Camera, Check } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
-import { useTheme } from "@/hooks/use-theme";
+import { useTheme, ACCENT_COLORS } from "@/hooks/use-theme";
  
 export default function Settings() {
-    const { theme, setTheme } = useTheme();
+    const { theme, setTheme, accentColor, setAccentColor } = useTheme();
     const [activeTab, setActiveTab] = useState("profile");
    const [saved, setSaved] = useState(false);
    const [profile, setProfile] = useState({
@@ -261,16 +261,23 @@ export default function Settings() {
                     </div>
                  </div>
  
-                 <div>
-                   <h3 className="font-medium mb-3">Accent Color</h3>
-                   <div className="flex gap-3">
-                     <button className="w-10 h-10 rounded-full bg-gradient-to-r from-teal-500 to-cyan-500 ring-2 ring-primary ring-offset-2 ring-offset-background" />
-                     <button className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-indigo-500" />
-                     <button className="w-10 h-10 rounded-full bg-gradient-to-r from-purple-500 to-pink-500" />
-                     <button className="w-10 h-10 rounded-full bg-gradient-to-r from-orange-500 to-red-500" />
-                     <button className="w-10 h-10 rounded-full bg-gradient-to-r from-green-500 to-emerald-500" />
-                   </div>
-                 </div>
+                  <div>
+                    <h3 className="font-medium mb-3">Accent Color</h3>
+                    <div className="flex gap-3">
+                      {(Object.keys(ACCENT_COLORS) as Array<keyof typeof ACCENT_COLORS>).map((key) => (
+                        <button
+                          key={key}
+                          onClick={() => setAccentColor(key)}
+                          className={`w-10 h-10 rounded-full ${ACCENT_COLORS[key].preview} transition-all ${
+                            accentColor === key
+                              ? "ring-2 ring-primary ring-offset-2 ring-offset-background scale-110"
+                              : "opacity-60 hover:opacity-100 hover:scale-105"
+                          }`}
+                          title={ACCENT_COLORS[key].label}
+                        />
+                      ))}
+                    </div>
+                  </div>
                </div>
              </div>
            )}
