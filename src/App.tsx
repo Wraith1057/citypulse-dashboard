@@ -17,6 +17,7 @@ import Emergency from "./pages/Emergency";
 import Reports from "./pages/Reports";
 import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
+import Register from "./pages/Register";
 import UserDashboard from "./pages/user/UserDashboard";
 import UserComplaints from "./pages/user/UserComplaints";
 import UserAddComplaint from "./pages/user/UserAddComplaint";
@@ -33,6 +34,7 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Login />} />
+            <Route path="/register" element={<Register />} />
             {/* Admin Routes */}
             <Route element={<DashboardLayout />}>
               <Route path="/dashboard" element={<Dashboard />} />
