@@ -31,14 +31,29 @@ export default function Login() {
       <div className="absolute bottom-20 right-20 w-96 h-96 bg-accent/15 rounded-full blur-3xl animate-float" style={{ animationDelay: "-3s" }} />
 
       {/* Login Card */}
-      <div className="relative w-full max-w-md glass-card p-8 animate-slide-up">
-        {/* Logo */}
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl gradient-primary mb-4 glow-primary animate-pulse-glow">
-            <Building2 className="w-8 h-8 text-primary-foreground" />
+      <div className="relative w-full max-w-5xl glass-card grid md:grid-cols-2 overflow-hidden animate-slide-up">
+        {/* Left - Branding Panel */}
+        <div className="hidden md:flex flex-col items-center justify-center p-12 gradient-primary relative">
+          <div className="absolute inset-0 bg-black/10" />
+          <div className="relative z-10 text-center space-y-4">
+            <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-white/20 backdrop-blur-sm mb-4">
+              <Building2 className="w-10 h-10 text-primary-foreground" />
+            </div>
+            <h1 className="text-4xl font-bold text-primary-foreground">CityOS</h1>
+            <p className="text-primary-foreground/80 text-lg max-w-xs">Smart City Management Platform for modern urban governance</p>
           </div>
-          <h1 className="text-2xl font-bold gradient-text">CityOS</h1>
-          <p className="text-muted-foreground mt-1">Smart City Management Platform</p>
+        </div>
+
+        {/* Right - Form Panel */}
+        <div className="p-8 md:p-10 flex flex-col justify-center">
+          <div className="text-center mb-6 md:hidden">
+            <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl gradient-primary mb-3 glow-primary">
+              <Building2 className="w-7 h-7 text-primary-foreground" />
+            </div>
+            <h1 className="text-2xl font-bold gradient-text">CityOS</h1>
+          </div>
+          <h2 className="text-xl font-bold text-foreground mb-1 hidden md:block">Welcome back</h2>
+          <p className="text-muted-foreground mb-6 hidden md:block">Sign in to your account</p>
         </div>
 
         {/* Role Toggle */}
@@ -136,10 +151,10 @@ export default function Login() {
           </Link>
         </p>
 
-        <p className="text-center text-sm text-muted-foreground mt-4">
+        <p className="text-center text-xs text-muted-foreground mt-4">
           © 2025 CityOS. All rights reserved.
         </p>
-      </div>
+        </div>
     </div>
   );
 }
