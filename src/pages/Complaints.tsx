@@ -61,10 +61,10 @@
          <div className="flex items-center gap-2">
            <Filter className="w-5 h-5 text-muted-foreground" />
            <Select value={statusFilter} onValueChange={setStatusFilter}>
-             <SelectTrigger className="w-40 glass-card border-glass-border">
-               <SelectValue placeholder="Filter by status" />
-             </SelectTrigger>
-             <SelectContent className="glass-card border-glass-border">
+              <SelectTrigger className="w-40">
+                <SelectValue placeholder="Filter by status" />
+              </SelectTrigger>
+              <SelectContent>
                <SelectItem value="all">All Status</SelectItem>
                <SelectItem value="pending">Pending</SelectItem>
                <SelectItem value="active">Active</SelectItem>
