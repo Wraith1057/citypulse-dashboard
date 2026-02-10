@@ -34,23 +34,23 @@ export default function Register() {
   };
 
   return (
-    <div className="min-h-screen relative flex items-center justify-center p-4 overflow-hidden bg-background">
+    <div className="h-screen relative flex items-center justify-center p-4 overflow-hidden bg-background">
       <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-accent/10" />
       <div className="absolute top-20 left-20 w-72 h-72 bg-primary/15 rounded-full blur-3xl animate-float" />
       <div className="absolute bottom-20 right-20 w-96 h-96 bg-accent/15 rounded-full blur-3xl animate-float" style={{ animationDelay: "-3s" }} />
 
-      <div className="relative w-full max-w-md glass-card p-8 animate-slide-up">
+      <div className="relative w-full max-w-md glass-card p-6 animate-slide-up">
         {/* Logo */}
-        <div className="text-center mb-6">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl gradient-primary mb-4 glow-primary animate-pulse-glow">
-            <Building2 className="w-8 h-8 text-primary-foreground" />
+        <div className="text-center mb-4">
+          <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl gradient-primary mb-3 glow-primary animate-pulse-glow">
+            <Building2 className="w-6 h-6 text-primary-foreground" />
           </div>
-          <h1 className="text-2xl font-bold gradient-text">Create Account</h1>
-          <p className="text-muted-foreground mt-1">Join CityOS as a Citizen</p>
+          <h1 className="text-xl font-bold gradient-text">Create Account</h1>
+          <p className="text-muted-foreground text-sm mt-0.5">Join CityOS as a Citizen</p>
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-3">
           <div className="space-y-1.5">
             <label className="text-sm font-medium text-muted-foreground">Full Name</label>
             <div className="relative">
@@ -149,14 +149,14 @@ export default function Register() {
           </button>
         </form>
 
-        <p className="text-center text-sm text-muted-foreground mt-5">
+        <p className="text-center text-sm text-muted-foreground mt-4">
           Already have an account?{" "}
           <Link to="/" className="text-primary hover:underline font-medium">
             Sign In
           </Link>
         </p>
 
-        <p className="text-center text-sm text-muted-foreground mt-4">
+        <p className="text-center text-xs text-muted-foreground mt-3">
           © 2025 CityOS. All rights reserved.
         </p>
       </div>
