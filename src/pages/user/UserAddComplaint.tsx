@@ -75,10 +75,10 @@ export default function UserAddComplaint() {
             Complaint Type
           </label>
           <Select value={formData.type} onValueChange={(value) => setFormData({ ...formData, type: value })}>
-            <SelectTrigger className="glass-card border-glass-border">
-              <SelectValue placeholder="Select complaint type" />
-            </SelectTrigger>
-            <SelectContent className="glass-card border-glass-border">
+             <SelectTrigger>
+               <SelectValue placeholder="Select complaint type" />
+             </SelectTrigger>
+             <SelectContent>
               <SelectItem value="roads">Roads & Infrastructure</SelectItem>
               <SelectItem value="water">Water Supply</SelectItem>
               <SelectItem value="electricity">Electricity</SelectItem>
@@ -103,10 +103,10 @@ export default function UserAddComplaint() {
             Priority Level
           </label>
           <Select value={formData.priority} onValueChange={(value) => setFormData({ ...formData, priority: value })}>
-            <SelectTrigger className="glass-card border-glass-border">
-              <SelectValue placeholder="Select priority" />
-            </SelectTrigger>
-            <SelectContent className="glass-card border-glass-border">
+             <SelectTrigger>
+               <SelectValue placeholder="Select priority" />
+             </SelectTrigger>
+             <SelectContent>
               <SelectItem value="low">Low - General Issue</SelectItem>
               <SelectItem value="medium">Medium - Needs Attention</SelectItem>
               <SelectItem value="high">High - Urgent</SelectItem>

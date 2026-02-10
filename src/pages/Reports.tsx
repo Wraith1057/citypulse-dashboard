@@ -1,5 +1,12 @@
 import { useState } from "react";
 import { Download, Calendar, FileText, BarChart3, PieChart, TrendingUp } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { useThemeChartStyles } from "@/hooks/use-chart-styles";
 import {
   AreaChart,
@@ -52,19 +59,18 @@ export default function Reports() {
            <p className="text-muted-foreground">Comprehensive insights and downloadable reports</p>
          </div>
          <div className="flex items-center gap-3">
-           <div className="flex items-center gap-2 px-4 py-2 glass-card">
-             <Calendar className="w-4 h-4 text-muted-foreground" />
-             <select
-               value={dateRange}
-               onChange={(e) => setDateRange(e.target.value)}
-               className="bg-transparent border-none outline-none text-sm"
-             >
-               <option value="last-30-days">Last 30 Days</option>
-               <option value="last-3-months">Last 3 Months</option>
-               <option value="last-6-months">Last 6 Months</option>
-               <option value="last-year">Last Year</option>
-             </select>
-           </div>
+            <Select value={dateRange} onValueChange={setDateRange}>
+              <SelectTrigger className="w-48">
+                <Calendar className="w-4 h-4 text-muted-foreground mr-2" />
+                <SelectValue placeholder="Select range" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="last-30-days">Last 30 Days</SelectItem>
+                <SelectItem value="last-3-months">Last 3 Months</SelectItem>
+                <SelectItem value="last-6-months">Last 6 Months</SelectItem>
+                <SelectItem value="last-year">Last Year</SelectItem>
+              </SelectContent>
+            </Select>
            <button className="btn-primary flex items-center gap-2 py-2">
              <Download className="w-4 h-4" />
              Export All
